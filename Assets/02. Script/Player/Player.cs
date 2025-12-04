@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Camera cam;
-
+    private Rigidbody2D rb;
+    private Camera cam;
+    private ParticleSystem particle;
 
     private void Start()
     {
         cam = Camera.main;
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        particle = gameObject.GetComponentInChildren<ParticleSystem>();
     }
 
 
     private void Update()
     {
+        // 로직 수정 필요 rb.velocity < 백터 제로면 행성 돌때 문제생김.
         if (Input.GetMouseButtonDown(0) && rb.velocity == Vector2.zero)
         {
             StartCoroutine(FireSpaceShip());
+            particle.Play();
         }
     }
 
