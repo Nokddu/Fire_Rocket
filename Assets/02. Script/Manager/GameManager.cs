@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<MonoBehaviour>
 {
-    // Start is called before the first frame update
-    void Start()
+    private int score;
+    public int Score { get => score; set { score = value; SetScore.Invoke(value); }  }
+
+    public Action<int> SetScore;
+
+    private void Start()
     {
-        Debug.Log("dd");
+        SetScore += TestDebug;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Score++;
+        }
+
+    }
+
+    public void TestDebug(int val)
+    {
+        Debug.Log(val);
     }
 }
