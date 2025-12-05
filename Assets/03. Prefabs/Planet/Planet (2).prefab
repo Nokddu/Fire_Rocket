@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3260295143135942590}
   - component: {fileID: 117580067818774329}
+  - component: {fileID: 2037920179827168683}
   m_Layer: 0
   m_Name: Planet (2)
   m_TagString: Untagged
@@ -84,3 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2037920179827168683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787013116535765924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598ca77b6352ace40ac0a34f56386ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  orbitPrefab: {fileID: 4632693193490929165, guid: 554e42baaa1ce8b49ae87bba9775af75, type: 3}
+  minPlanetScale: 0.7
+  maxPlanetScale: 1.5
+  minOrbit: 1.05
+  maxOrbit: 1.25
