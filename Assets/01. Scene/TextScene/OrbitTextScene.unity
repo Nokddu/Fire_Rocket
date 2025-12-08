@@ -608,6 +608,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.334
       objectReference: {fileID: 0}
+    - target: {fileID: 4584551310047676504, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
+      propertyPath: orbitSizeScale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8176812582889634327, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
       propertyPath: m_BodyType
       value: 1
@@ -687,6 +691,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitSpeed: 90
   launchSpeed: 5
+  radiusLerpSpeed: 5
+  rotationLerpSpeed: 10
   startSearchRadius: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
