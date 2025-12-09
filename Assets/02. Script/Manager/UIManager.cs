@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +8,13 @@ public class UIManager : MonoBehaviour
     public GameObject pausePanel;   // 일시정지 패널
 
     private bool isPaused = false;
+
+    private bool isCombo = true;
+
+    // 옮길예정
+    int combo;
+
+    float timecheck = 3.6f;
 
 
     private TextMeshProUGUI text;
@@ -31,6 +39,24 @@ public class UIManager : MonoBehaviour
     {
         text.text = val.ToString();
         Debug.Log(val);
+
+        StopCoroutine(Combo());
+        StartCoroutine(Combo());
+    }
+
+    IEnumerator Combo()
+    {
+        combo++;
+        while (isCombo)
+        {
+            timecheck -= Time.deltaTime;
+            if (timecheck < 0)
+            {
+                isCombo = false;
+            }
+            yield return null;
+        }
+        combo = 0;
     }
 
     public void PauseGame()
