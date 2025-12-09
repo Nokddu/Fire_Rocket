@@ -213,7 +213,7 @@ MonoBehaviour:
   rayDistance: 30
   rayLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
 --- !u!1 &8431129293330810588
 GameObject:
   m_ObjectHideFlags: 0
@@ -5118,7 +5118,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.3
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -5136,13 +5136,13 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.66425115
-        value: 0.2620321
-        inSlope: -1.9251347
-        outSlope: -1.9251347
+        time: 1
+        value: 0.28877005
+        inSlope: -2.1487887
+        outSlope: -2.1487887
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.08363632
+        inWeight: 0.124087594
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 0}
+  text: {fileID: 3938993614168776873}
 --- !u!1 &4996418658640311611
 GameObject:
   m_ObjectHideFlags: 0

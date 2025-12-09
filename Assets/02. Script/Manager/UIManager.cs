@@ -9,10 +9,12 @@ public class UIManager : MonoBehaviour
     private bool isPaused = false;
 
 
+    [SerializeField]
     private TextMeshProUGUI text;
     void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
+        text = GetComponentInChildren<TextMeshProUGUI>();
+        GameManager.Instance.SetScore += ScoreSet;
     }
 
 
@@ -24,6 +26,13 @@ public class UIManager : MonoBehaviour
                 PauseGame();
         }
     }
+
+    private void ScoreSet(int val)
+    {
+        text.text = val.ToString();
+        Debug.Log(val);
+    }
+
     public void PauseGame()
     {
         if (isPaused)
