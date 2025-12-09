@@ -196,6 +196,7 @@ public class RocketOrbitController : MonoBehaviour
 
         // 현재 바라보는 방향과 각도 차이가 더 작은 방향으로 도는 쪽 선택
         orbitDirection = (dotCCW >= dotCW) ? 1f : -1f;
+        GameManager.Instance.Score++;
     }
 
     /// <summary>
