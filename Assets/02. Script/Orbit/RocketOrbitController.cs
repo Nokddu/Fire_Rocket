@@ -39,6 +39,8 @@ public class RocketOrbitController : MonoBehaviour
 
     private ParticleSystem particle;
 
+    private PlanetSpawner planetSpawner;
+
     // ─────────────────────────────────────────────
     // Player(카메라)에서 참조할 공개 프로퍼티
     // ─────────────────────────────────────────────
@@ -49,7 +51,9 @@ public class RocketOrbitController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         particle = GetComponentInChildren<ParticleSystem>();
-        rb.isKinematic = true;      // 물리 힘/속도 안 씀
+        planetSpawner = FindObjectOfType<PlanetSpawner>();
+
+        rb.isKinematic = true;
         rb.gravityScale = 0f;
     }
 
@@ -159,6 +163,11 @@ public class RocketOrbitController : MonoBehaviour
         isOrbiting = true;
 
         orbitCenter = orbitTransform;
+
+        if (planetSpawner != null)
+        {
+            planetSpawner.OnRocketEnterOrbit(orbitTransform);
+        }
 
         // 1) 목표 반지름: Orbit 오브젝트의 CircleCollider2D에서 가져오기
         float radiusFromCollider = 1f;
