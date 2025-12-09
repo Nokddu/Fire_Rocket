@@ -9,9 +9,9 @@ public class UIManager : MonoBehaviour
     private bool isPaused = false;
 
 
-    [SerializeField]
     private TextMeshProUGUI text;
-    void Start()
+
+    private void Start()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
         GameManager.Instance.SetScore += ScoreSet;
