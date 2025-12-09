@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,39 +10,38 @@ public class PlanetSpawner : MonoBehaviour
     public float startPlanet = 0f;
 
     [Header("처음 한 번에 생성할 행성 수")]
-    public int initialSpawnCount = 6;   // 시작할 때 대략 1개 + 앞쪽 몇 개
+    public int initialSpawnCount = 3;
 
     [Header("현재 행성 기준 앞/뒤 유지 개수")]
-    public int aheadCount = 5;          // 앞(위쪽)으로 항상 유지할 개수
-    public int maxBehindCount = 3;      // 뒤(아래쪽)으로 최대 유지 개수
+    public int aheadCount = 5;      // 앞쪽(위쪽)으로 최소 몇 개 유지할지
+    public int maxBehindCount = 3;  // 뒤쪽(아래쪽)으로 최대 몇 개 남길지
 
     [Header("행성 X축 위치 범위")]
-    public float minX = -1.0f;
-    public float maxX = 1.0f;
+    public float minX = -3f;
+    public float maxX = 3f;
 
     [Header("궤도 간 최소 거리")]
-    public float orbitGap = 7f;
+    public float orbitGap = 3f;
 
-    // 행성 + 궤도 한 쌍
+    // 행성 + 궤도 한 세트
     private class PlanetEntry
     {
-        public GameObject planetGO;
-        public GameObject orbitGO;
+        public GameObject planet;
+        public GameObject orbit;
     }
 
-    // 현재까지 생성된 행성 목록 (Y가 작은 것부터 순서대로)
     private readonly List<PlanetEntry> planets = new List<PlanetEntry>();
 
-    private float nextY;          // 다음 행성이 생성될 Y
-    private float prevOrbitHalf;  // 이전 궤도 반지름 절반
-    private int currentIndex = -1; // 플레이어가 도달한 "현재" 행성 인덱스
+    private float nextY;           // 다음 행성이 생성될 Y
+    private float prevOrbitHalf;   // 이전 궤도 스케일의 절반
+    private int currentIndex = -1; // 로켓이 도달한 “현재 행성” 인덱스
 
     private void Start()
     {
         nextY = startPlanet;
         prevOrbitHalf = 0f;
 
-        // 시작할 때 몇 개 먼저 깔아두기
+        // 처음에 몇 개 미리 깔아두기
         for (int i = 0; i < initialSpawnCount; i++)
         {
             SpawnNextPlanet();
@@ -51,28 +49,24 @@ public class PlanetSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// 다음 위치에 행성 + 궤도 한 쌍을 생성하고 리스트에 추가
+    /// 행성 + 궤도 한 세트를 생성해서 리스트에 추가
     /// </summary>
     private void SpawnNextPlanet()
     {
         if (planetPrefabs == null || planetPrefabs.Length == 0)
         {
-            Debug.LogWarning("PlanetSpawner: planetPrefabs 비어 있음");
+            Debug.LogWarning("PlanetSpawner : planetPrefabs 비어 있음");
             return;
         }
 
         GameObject prefabGO = planetPrefabs[Random.Range(0, planetPrefabs.Length)];
 
         float x = Random.Range(minX, maxX);
-        Vector3 position = new Vector3(x, nextY, 0f);
+        Vector3 pos = new Vector3(x, nextY, 0f);
 
         // 행성 생성
-        GameObject planetGO = Instantiate(prefabGO, position, Quaternion.identity);
+        GameObject planetGO = Instantiate(prefabGO, pos, Quaternion.identity);
         Planet planet = planetGO.GetComponent<Planet>();
-        if (planet == null)
-        {
-            Debug.LogError("PlanetSpawner: Planet 컴포넌트가 프리팹에 없습니다.");
-        }
 
         float planetScale = 1f;
         if (planet != null)
@@ -87,7 +81,7 @@ public class PlanetSpawner : MonoBehaviour
 
         if (planet != null && planet.orbitPrefab != null)
         {
-            orbitGO = Instantiate(planet.orbitPrefab, position, Quaternion.identity);
+            orbitGO = Instantiate(planet.orbitPrefab, pos, Quaternion.identity);
 
             float orbitScale = planet.GetOrbitScale(planetScale);
             orbitGO.transform.localScale = Vector3.one * orbitScale;
@@ -95,65 +89,76 @@ public class PlanetSpawner : MonoBehaviour
             orbitHalf = orbitScale * 0.5f;
         }
 
-        // 다음 Y 위치 업데이트 (이전 궤도 반지름 + 이번 궤도 반지름 + 간격)
+        // 다음 Y 위치 갱신 (궤도끼리 안 겹치도록)
         nextY += (prevOrbitHalf + orbitHalf) + orbitGap;
         prevOrbitHalf = orbitHalf;
 
-        // 리스트에 저장
         planets.Add(new PlanetEntry
         {
-            planetGO = planetGO,
-            orbitGO = orbitGO
+            planet = planetGO,
+            orbit = orbitGO
         });
     }
 
-    /// <summary>
-    /// 로켓이 어떤 궤도에 도달했을 때 PlanetSpawner에 알려주는 함수.
-    /// orbitTransform = 궤도 오브젝트의 Transform
-    /// </summary>
+    // ─────────────────────────────────────
+    // 1) 로켓이 실제로 궤도에 “도달했을 때” 호출
+    //    → 앞 5 / 뒤 3 유지
+    // ─────────────────────────────────────
     public void OnRocketEnterOrbit(Transform orbitTransform)
     {
         if (orbitTransform == null) return;
 
-        // 0. 어떤 행성의 궤도인지 찾기
-        int index = planets.FindIndex(p => p.orbitGO != null && p.orbitGO.transform == orbitTransform);
-        if (index == -1)
-        {
-            // 리스트에 없는 궤도라면 그냥 무시
-            return;
-        }
+        int index = planets.FindIndex(p => p.orbit != null && p.orbit.transform == orbitTransform);
+        if (index == -1) return;
 
-        // 현재 행성 인덱스 갱신
         currentIndex = index;
 
-        // ─────────────────────────────
-        // 1) 앞쪽(위쪽) 행성 미리 생성 : 항상 aheadCount 개 유지
-        // ─────────────────────────────
-        int ahead = planets.Count - 1 - currentIndex;  // 현재 기준 앞으로 몇 개 있는지
-        while (ahead < aheadCount)
-        {
-            SpawnNextPlanet();
-            ahead = planets.Count - 1 - currentIndex;
-        }
+        // (1) 현재 기준으로 앞쪽 최소 aheadCount 개 유지
+        EnsureAheadFromIndex(index);
 
-        // ─────────────────────────────
-        // 2) 뒤쪽(아래쪽) 행성 정리 : maxBehindCount 개만 남기고 나머지 삭제
-        // ─────────────────────────────
-        // 인덱스 0 ~ currentIndex-1 이 뒤쪽 행성들
-        int behind = currentIndex;
+        // (2) 뒤쪽은 maxBehindCount 개만 남기고 나머지 삭제
+        int behind = currentIndex;                           // 0 ~ currentIndex-1 이 뒤쪽
         int removeCount = Mathf.Max(0, behind - maxBehindCount);
 
         for (int i = 0; i < removeCount; i++)
         {
             var entry = planets[0];
 
-            if (entry.planetGO != null)
-                Destroy(entry.planetGO);
-            if (entry.orbitGO != null)
-                Destroy(entry.orbitGO);
+            if (entry.planet != null) Destroy(entry.planet);
+            if (entry.orbit != null) Destroy(entry.orbit);
 
             planets.RemoveAt(0);
-            currentIndex--;  // 리스트 앞에서 지웠으니까 인덱스 한 칸씩 당겨짐
+            currentIndex--;  // 앞에서 하나 지울 때마다 인덱스 앞으로 당겨짐
+        }
+    }
+
+    // ─────────────────────────────────────
+    // 2) 플레이어 앞 레이가 궤도에 맞았을 때 호출
+    //    → “그 궤도 기준으로 앞에 부족하면 미리 생성”
+    //    (currentIndex는 건드리지 않음)
+    // ─────────────────────────────────────
+    public void OnOrbitRayHit(Transform orbitTransform)
+    {
+        if (orbitTransform == null) return;
+
+        int index = planets.FindIndex(p => p.orbit != null && p.orbit.transform == orbitTransform);
+        if (index == -1) return;
+
+        // 이 궤도 기준으로 앞에 항상 aheadCount 개가 있도록 보장
+        EnsureAheadFromIndex(index);
+    }
+
+    /// <summary>
+    /// 특정 인덱스를 기준으로 앞쪽 행성이 최소 aheadCount 개가 되도록 보장
+    /// </summary>
+    private void EnsureAheadFromIndex(int index)
+    {
+        int ahead = planets.Count - 1 - index;   // index 기준 앞으로 몇 개 있는지
+
+        while (ahead < aheadCount)
+        {
+            SpawnNextPlanet();
+            ahead = planets.Count - 1 - index;
         }
     }
 }
