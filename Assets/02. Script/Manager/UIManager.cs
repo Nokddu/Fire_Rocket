@@ -1,32 +1,45 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-
     public GameObject pausePanel;   // 일시정지 패널
-
     private bool isPaused = false;
 
-    private bool isCombo = true;
+    [Header("점수 텍스트")]
+    [SerializeField] private TextMeshProUGUI scoreText;
 
-    // 옮길예정
-    int combo;
-
-    float timecheck = 3.6f;
-
-
-    private TextMeshProUGUI text;
+    [Header("콤보 UI")]
+    [SerializeField] private Slider comboSlider;           // min=0, max=1
+    [SerializeField] private TextMeshProUGUI comboText;    // "x1", "x2", "x3"
 
     private void Start()
     {
-        text = GetComponentInChildren<TextMeshProUGUI>();
+        if (scoreText == null)
+            scoreText = GetComponentInChildren<TextMeshProUGUI>();
+
         GameManager.Instance.SetScore += ScoreSet;
+        GameManager.Instance.OnComboChanged += ComboChanged;
+        GameManager.Instance.OnComboProgressChanged += ComboProgressChanged;
+
+        if (comboSlider != null)
+            comboSlider.value = 1f;
+
+        if (comboText != null)
+            comboText.text = "Combo x1!";
     }
 
+    private void OnDestroy()
+    {
+        if (GameManager.Instance == null) return;
 
-    void Update()
+        GameManager.Instance.SetScore -= ScoreSet;
+        GameManager.Instance.OnComboChanged -= ComboChanged;
+        GameManager.Instance.OnComboProgressChanged -= ComboProgressChanged;
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -37,44 +50,33 @@ public class UIManager : MonoBehaviour
 
     private void ScoreSet(int val)
     {
-        text.text = val.ToString();
-        Debug.Log(val);
-
-        StopCoroutine(Combo());
-        StartCoroutine(Combo());
+        if (scoreText != null)
+            scoreText.text = val.ToString();
     }
 
-    IEnumerator Combo()
+    private void ComboChanged(int combo)
     {
-        combo++;
-        while (isCombo)
-        {
-            timecheck -= Time.deltaTime;
-            if (timecheck < 0)
-            {
-                isCombo = false;
-            }
-            yield return null;
-        }
-        combo = 0;
+        if (comboText != null)
+            comboText.text = $"Combo x{combo}!";
+    }
+
+    private void ComboProgressChanged(float normalized)
+    {
+        if (comboSlider != null)
+            comboSlider.value = normalized;
     }
 
     public void PauseGame()
     {
         if (isPaused)
         {
-            // 일시정지 해제
             Time.timeScale = 1f;
             isPaused = false;
         }
         else
         {
-            // 일시정지 시작
             Time.timeScale = 0f;
             isPaused = true;
         }
-
     }
-
-
 }
