@@ -1,20 +1,12 @@
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
-
     public GameObject pausePanel;   // 일시정지 패널
 
     private bool isPaused = false;
-
-
-    private TextMeshProUGUI text;
-    void Start()
-    {
-        text = GetComponent<TextMeshProUGUI>();
-    }
-
 
     void Update()
     {
@@ -24,6 +16,8 @@ public class UIManager : MonoBehaviour
                 PauseGame();
         }
     }
+
+
     public void PauseGame()
     {
         if (isPaused)
@@ -38,7 +32,6 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 0f;
             isPaused = true;
         }
-
     }
 
 
