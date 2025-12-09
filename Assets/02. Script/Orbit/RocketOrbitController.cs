@@ -36,6 +36,8 @@ public class RocketOrbitController : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private PlanetSpawner planetSpawner;
+
     // ─────────────────────────────────────────────
     // Player(카메라)에서 참조할 공개 프로퍼티
     // ─────────────────────────────────────────────
@@ -47,6 +49,7 @@ public class RocketOrbitController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.isKinematic = true;      // 물리 힘/속도 안 씀
         rb.gravityScale = 0f;
+        planetSpawner = FindObjectOfType<PlanetSpawner>();
     }
 
     private void Start()
@@ -222,6 +225,10 @@ public class RocketOrbitController : MonoBehaviour
         if (isFlying)
         {
             EnterOrbit(other.transform);
+        }
+        if (planetSpawner != null)
+        {
+            planetSpawner.OnRocketEnterOrbit(other.transform);
         }
     }
 }
