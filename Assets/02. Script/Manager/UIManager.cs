@@ -6,6 +6,13 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI text;
     void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
+        text = GetComponentInChildren<TextMeshProUGUI>();
+        GameManager.Instance.SetScore += ScoreSet;
+    }
+
+    private void ScoreSet(int val)
+    {
+        text.text = val.ToString();
+        Debug.Log(val);
     }
 }

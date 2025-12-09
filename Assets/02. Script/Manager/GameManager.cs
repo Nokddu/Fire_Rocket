@@ -1,17 +1,12 @@
 using System;
 using UnityEngine;
 
-public class GameManager : Singleton<MonoBehaviour>
+public class GameManager : Singleton<GameManager>
 {
     private int score;
     public int Score { get => score; set { score = value; SetScore.Invoke(value); }  }
 
     public Action<int> SetScore;
-
-    private void Start()
-    {
-        SetScore += TestDebug;
-    }
 
     private void Update()
     {
@@ -20,10 +15,5 @@ public class GameManager : Singleton<MonoBehaviour>
             Score++;
         }
 
-    }
-
-    public void TestDebug(int val)
-    {
-        Debug.Log(val);
     }
 }
