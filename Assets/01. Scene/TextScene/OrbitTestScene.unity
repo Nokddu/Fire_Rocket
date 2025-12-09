@@ -171,7 +171,9 @@ MonoBehaviour:
   - {fileID: 5787013116535765924, guid: e82fb23ccfa993242a137a07b390a269, type: 3}
   - {fileID: 6157349067629351060, guid: d915d6858885e214faafbc987ca0b475, type: 3}
   startPlanet: 1
-  planetCount: 20
+  initialSpawnCount: 2
+  aheadCount: 2
+  maxBehindCount: 0
   minX: -3
   maxX: 3
   orbitGap: 3
