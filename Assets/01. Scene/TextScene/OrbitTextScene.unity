@@ -500,6 +500,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1150947792063948191, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
+      propertyPath: rayLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 3312841330437370100, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
       propertyPath: m_Name
       value: SpaceShip
