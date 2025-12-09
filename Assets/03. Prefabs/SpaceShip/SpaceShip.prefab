@@ -383,7 +383,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.12
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -501,7 +501,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.04
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -879,7 +879,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 62.31
+    angle: 31.05
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0.79
@@ -963,9 +963,9 @@ ParticleSystem:
     m_TextureBilinearFiltering: 0
     randomDirectionAmount: 0
     sphericalDirectionAmount: 0
-    randomPositionAmount: 1.9
+    randomPositionAmount: 0.24
     radius:
-      value: 1.9264569
+      value: 0.4
       mode: 0
       spread: 0
       speed:
@@ -5122,7 +5122,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 0.07
     widthCurve:
       serializedVersion: 2
       m_Curve:
