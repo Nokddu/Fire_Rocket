@@ -192,7 +192,7 @@ public class PlanetSpawner : MonoBehaviour
 
         // 로직 바뀔수 있음
         // 랜덤 스폰, 일정 행성 갯수
-        int spawnRate = Random.Range(80, 100);
+        int spawnRate = Random.Range(90, 100);
 
         if (spawnRate >= 90)
         {
