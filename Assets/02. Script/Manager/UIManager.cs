@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public GameObject pausePanel;   // 일시정지 패널
+    public GameObject restart; //재시작 패널
     private bool isPaused = false;
 
     [Header("점수 텍스트")]
@@ -66,7 +68,7 @@ public class UIManager : MonoBehaviour
             comboSlider.value = normalized;
     }
 
-    public void PauseGame()
+    public void PauseGame() //일시 정지
     {
         if (isPaused)
         {
@@ -79,4 +81,12 @@ public class UIManager : MonoBehaviour
             isPaused = true;
         }
     }
+
+    // 게임 다시 시작 (씬 재로드)
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
