@@ -23,6 +23,14 @@ public class PlanetSpawner : MonoBehaviour
     [Header("궤도 간 최소 거리")]
     public float orbitGap = 3f;
 
+    //임시 재화 프리팹
+    public GameObject Money;
+
+
+    // 재화 스폰 위치
+    private Vector3 prevTrans;
+    private Vector3 curTrans;
+
     // 행성 + 궤도 한 세트
     private class PlanetEntry
     {
@@ -68,6 +76,8 @@ public class PlanetSpawner : MonoBehaviour
         GameObject planetGO = Instantiate(prefabGO, pos, Quaternion.identity);
         Planet planet = planetGO.GetComponent<Planet>();
 
+        
+
         float planetScale = 1f;
         if (planet != null)
         {
@@ -88,6 +98,8 @@ public class PlanetSpawner : MonoBehaviour
 
             orbitHalf = orbitScale * 0.5f;
         }
+
+        SpawnMoney(orbitGO);
 
         // 다음 Y 위치 갱신 (궤도끼리 안 겹치도록)
         nextY += (prevOrbitHalf + orbitHalf) + orbitGap;
@@ -160,5 +172,33 @@ public class PlanetSpawner : MonoBehaviour
             SpawnNextPlanet();
             ahead = planets.Count - 1 - index;
         }
+    }
+
+    // 재화 스폰 로직
+    private void SpawnMoney(GameObject orbit)
+    {
+        OrbitCircle circle= orbit.GetComponent<OrbitCircle>();
+        Transform top = circle.Top;
+        Transform bottom = circle.Bottom;
+
+        curTrans = bottom.position;
+
+        if (prevTrans == null)
+        {
+            prevTrans = Vector3.zero;
+        }
+
+        Vector3 spawnTrans = (curTrans + prevTrans) / 2;
+
+        // 로직 바뀔수 있음
+        // 랜덤 스폰, 일정 행성 갯수
+        int spawnRate = Random.Range(80, 100);
+
+        if (spawnRate >= 90)
+        {
+            Instantiate(Money, spawnTrans, Quaternion.identity);
+        }
+
+        prevTrans = top.position;
     }
 }
