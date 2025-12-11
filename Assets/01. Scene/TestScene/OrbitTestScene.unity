@@ -177,6 +177,7 @@ MonoBehaviour:
   minX: -2
   maxX: 2
   orbitGap: 3
+  Money: {fileID: 3632881889227958278, guid: 85ae8abd6d57ddb46ace909313406b2e, type: 3}
 --- !u!1001 &435794766
 PrefabInstance:
   m_ObjectHideFlags: 0
