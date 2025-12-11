@@ -23,6 +23,11 @@ public class PlanetSpawner : MonoBehaviour
     [Header("궤도 간 최소 거리")]
     public float orbitGap = 3f;
 
+    [Header("카메라 연동 설정 (CameraController 값과 맞춰주세요)")]
+    public float camBaseSize = 5f;       // 카메라 기본 사이즈
+    public float camSizeScale = 1.1f;    // 궤도 크기에 곱해지는 배율
+    public float camOffsetY = 2.0f;      // Player의 Planet Offset Y값과 동일하게 (2.0)
+    public float topMargin = 1.0f;
     //임시 재화 프리팹
     public GameObject Money;
 
@@ -101,8 +106,17 @@ public class PlanetSpawner : MonoBehaviour
 
         SpawnMoney(orbitGO);
 
+        float predictedCamSize = Mathf.Max(camBaseSize, orbitHalf * camSizeScale);
+
+        float visualDistance = camOffsetY + predictedCamSize - topMargin;
+
+        float physicalDistance = orbitHalf + orbitGap;
+
+        float finalStepY = Mathf.Max(visualDistance, physicalDistance);
+
         // 다음 Y 위치 갱신 (궤도끼리 안 겹치도록)
-        nextY += (prevOrbitHalf + orbitHalf) + orbitGap;
+        nextY += finalStepY;
+
         prevOrbitHalf = orbitHalf;
 
         planets.Add(new PlanetEntry
