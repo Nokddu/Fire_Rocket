@@ -170,17 +170,13 @@ MonoBehaviour:
   - {fileID: 176559646451558225, guid: 5e22738adddda6341b517a2ffe105411, type: 3}
   - {fileID: 5787013116535765924, guid: e82fb23ccfa993242a137a07b390a269, type: 3}
   - {fileID: 6157349067629351060, guid: d915d6858885e214faafbc987ca0b475, type: 3}
-  startPlanet: 4.5
+  startPlanet: 1
   initialSpawnCount: 2
   aheadCount: 2
   maxBehindCount: 0
   minX: -2
   maxX: 2
-  orbitGap: 4
-  camBaseSize: 2
-  camSizeScale: 4
-  camOffsetY: 1.5
-  topMargin: 0.5
+  orbitGap: 3
   Money: {fileID: 3632881889227958278, guid: 85ae8abd6d57ddb46ace909313406b2e, type: 3}
 --- !u!1001 &435794766
 PrefabInstance:
@@ -196,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3037145361854495309, guid: d915d6858885e214faafbc987ca0b475, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 3037145361854495309, guid: d915d6858885e214faafbc987ca0b475, type: 3}
       propertyPath: m_LocalPosition.z
@@ -650,7 +646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4101874520644738621, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4101874520644738621, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
       propertyPath: m_LocalPosition.z
@@ -683,10 +679,6 @@ PrefabInstance:
     - target: {fileID: 4101874520644738621, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4584551310047676504, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
-      propertyPath: orbitSizeScale
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
