@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
   orbitPrefab: {fileID: 4632693193490929165, guid: 554e42baaa1ce8b49ae87bba9775af75, type: 3}
-  minPlanetScale: 0.5
-  maxPlanetScale: 3
+  minPlanetScale: 1
+  maxPlanetScale: 2
   minOrbit: 1
   maxOrbit: 2
