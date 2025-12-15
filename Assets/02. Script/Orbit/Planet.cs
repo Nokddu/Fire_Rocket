@@ -16,7 +16,7 @@ public class Planet : MonoBehaviour
 
     [Header("궤도 크기 배율")]
     public float minOrbit = 1.05f;
-    public float maxOrbit = 1.25f;
+    public float maxOrbit = 1.07f;
 
     public float GetRandomPlanetScale()
     {

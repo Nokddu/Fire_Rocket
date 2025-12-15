@@ -176,7 +176,7 @@ MonoBehaviour:
   maxBehindCount: 0
   minX: -2
   maxX: 2
-  orbitGap: 3
+  orbitGap: 2
   Money: {fileID: 3632881889227958278, guid: 85ae8abd6d57ddb46ace909313406b2e, type: 3}
 --- !u!1001 &435794766
 PrefabInstance:
@@ -466,6 +466,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 717533212441250410, guid: 554e42baaa1ce8b49ae87bba9775af75, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8887ba0586e34004e92580c71f7ca368, type: 3}
+    - target: {fileID: 1886276442275266132, guid: 554e42baaa1ce8b49ae87bba9775af75, type: 3}
+      propertyPath: m_Radius
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886276442275266132, guid: 554e42baaa1ce8b49ae87bba9775af75, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886276442275266132, guid: 554e42baaa1ce8b49ae87bba9775af75, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4632693193490929165, guid: 554e42baaa1ce8b49ae87bba9775af75, type: 3}
       propertyPath: m_Name
       value: Orbit
