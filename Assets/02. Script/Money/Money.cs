@@ -10,15 +10,15 @@ public class Money : MonoBehaviour
 
     private Vector2 startPos; // 기준점 (스폰 위치)
 
-    private void Start()
-    {
-        startPos = transform.position;
-    }
+    //private void Start()
+    //{
+    //    startPos = transform.position;
+    //}
 
-    private void Update()
-    {
-        float xOffset = Mathf.Sin(Time.time * speed) * range;
+    //private void Update()
+    //{
+    //    float xOffset = Mathf.Sin(Time.time * speed) * range;
 
-        transform.position = new Vector2(startPos.x + xOffset, startPos.y);
-    }
+    //    transform.position = new Vector2(startPos.x + xOffset, startPos.y);
+    //}
 }
