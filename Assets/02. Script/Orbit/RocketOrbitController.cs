@@ -27,6 +27,7 @@ public class RocketOrbitController : MonoBehaviour
     // 내부 상태
     private bool isOrbiting = false;    // 행성 주위를 도는 중인지
     private bool isFlying = false;      // 직선 비행 중인지
+    private bool isFirst = true;        // 첫번째 행성인지
 
     private Transform orbitCenter;      // 현재 도는 궤도의 중심(행성 위치)
     private float orbitAngle;           // 궤도 상의 각도 (degree)
@@ -151,7 +152,7 @@ public class RocketOrbitController : MonoBehaviour
         orbitAccumulatedAngle += Mathf.Abs(delta);
 
         float remain01 = 1f - (orbitAccumulatedAngle / fullOrbitForCombo);
-        if (GameManager.Instance != null)
+        if (GameManager.Instance != null && !isFirst)
             GameManager.Instance.SetComboProgress01(remain01);
 
         // 한 바퀴 이상 돌면 콤보 리셋 (한 번만)
@@ -256,6 +257,7 @@ public class RocketOrbitController : MonoBehaviour
             particle.Play();
 
         flyDirection = transform.up.normalized;
+        isFirst = false; // 처음 시작을 알림
     }
 
     // 궤도 트리거에 닿았을 때
