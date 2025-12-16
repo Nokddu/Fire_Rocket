@@ -24,8 +24,9 @@ public class GameManager : Singleton<GameManager>
     public Action<int> SetScore;
 
     // 콤보 관련 이벤트
-    public Action<int> OnComboChanged;           // 콤보 단계 변경(x1,x2,x3)
+    public Action<int> OnComboMultipleChanged;           // 콤보 단계 변경(x1,x2,x3)
     public Action<float> OnComboProgressChanged; // 콤보 슬라이더(0~1)
+    public Action<int> OnComboChanged; // 콤보
 
     //// 현재 콤보 단계와 배율(1,2,3)
     //public int ComboLevel => comboLevel;
@@ -52,11 +53,12 @@ public class GameManager : Singleton<GameManager>
     {
         get
         {
-            if (ComboLevel == 1)
-                return 1.1f;
-            if (ComboLevel == 2)
-                return Mathf.Lerp(1.1f, 1.5f, 1f); // 정확히 1.5
-            return maxSpeedMultiple; // 3레벨 = 2.0
+            //if (ComboLevel == 1)
+            //    return 1.1f;
+            //if (ComboLevel == 2)
+            //    return Mathf.Lerp(1.1f, 1.5f, 1f); // 정확히 1.5
+            float multiple = 1 + (comboCount * 0.1f);
+            return Mathf.Clamp(multiple, 1,2); ; // 3레벨 = 2.0
         }
     }
 
@@ -76,10 +78,10 @@ public class GameManager : Singleton<GameManager>
         int before = ComboLevel;
 
         comboCount++;
-
+        OnComboChanged?.Invoke(comboCount);
         if (ComboLevel != before)
         {
-            OnComboChanged?.Invoke(ComboLevel);
+            OnComboMultipleChanged?.Invoke(ComboLevel);
         }
     }
 
@@ -91,9 +93,9 @@ public class GameManager : Singleton<GameManager>
         int before = ComboLevel;
 
         comboCount = 0;
-
+        OnComboChanged?.Invoke(comboCount);
         if (ComboLevel != before)
-            OnComboChanged?.Invoke(ComboLevel);
+            OnComboMultipleChanged?.Invoke(ComboLevel);
     }
 
     /// <summary>

@@ -127,7 +127,7 @@ public class RocketOrbitController : MonoBehaviour
         // 현재 반지름을 부드럽게 궤도 반지름으로 수렴
         currentRadius = Mathf.Lerp(currentRadius, targetRadius, radiusLerpSpeed * Time.deltaTime);
 
-        float comboMul = (GameManager.Instance != null) ? GameManager.Instance.ScoreMultiple : 1f;
+        float comboMul = (GameManager.Instance != null) ? GameManager.Instance.SpeedMultiple : 1f;
         float prevAngle = orbitAngle;
 
         // 각도 갱신 (콤보 배율 적용)
