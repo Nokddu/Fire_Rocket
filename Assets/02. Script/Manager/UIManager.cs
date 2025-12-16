@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform comboSlider;           // min=0, max=1
     [SerializeField] private TextMeshProUGUI comboMultipleText;    // "x1", "x2", "x3"
     [SerializeField] private TextMeshProUGUI comboText;
+    [SerializeField] private CanvasGroup comboGroup;
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.OnComboChanged += ComboChanged; 
 
         if (comboSlider != null)
-            comboSlider.localScale = Vector3.right;
+            comboSlider.localScale = Vector3.zero;
 
         if (comboMultipleText != null)
             comboMultipleText.text = "X1";
@@ -87,7 +88,10 @@ public class UIManager : MonoBehaviour
     private void ComboProgressChanged(float normalized)
     {
         if (comboSlider != null)
+        {
             comboSlider.localScale = new Vector3(normalized, 1, 0);
+            comboGroup.alpha = normalized;
+        }
     }
 
     public void PauseGame() //일시 정지
