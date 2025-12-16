@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,10 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [Header("콤보 UI")]
-    [SerializeField] private Transform comboSlider;           // min=0, max=1
-    [SerializeField] private TextMeshProUGUI comboMultipleText;    // "x1", "x2", "x3"
-    [SerializeField] private TextMeshProUGUI comboText;
-    [SerializeField] private CanvasGroup comboGroup;
+    [SerializeField] private Slider comboSlider;           // min=0, max=1
+    [SerializeField] private TextMeshProUGUI comboText;    // "x1", "x2", "x3"
 
     private void Start()
     {
@@ -25,15 +22,14 @@ public class UIManager : MonoBehaviour
             scoreText = GetComponentInChildren<TextMeshProUGUI>();
 
         GameManager.Instance.SetScore += ScoreSet;
-        GameManager.Instance.OnComboMultipleChanged += ComboMultipleChanged;
+        GameManager.Instance.OnComboChanged += ComboChanged;
         GameManager.Instance.OnComboProgressChanged += ComboProgressChanged;
-        GameManager.Instance.OnComboChanged += ComboChanged; 
 
         if (comboSlider != null)
-            comboSlider.localScale = Vector3.zero;
+            comboSlider.value = 1f;
 
-        if (comboMultipleText != null)
-            comboMultipleText.text = "X1";
+        if (comboText != null)
+            comboText.text = "Combo x1!";
     }
 
     private void OnDestroy()
@@ -41,9 +37,8 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance == null) return;
 
         GameManager.Instance.SetScore -= ScoreSet;
-        GameManager.Instance.OnComboMultipleChanged -= ComboMultipleChanged; 
-        GameManager.Instance.OnComboProgressChanged -= ComboProgressChanged;
         GameManager.Instance.OnComboChanged -= ComboChanged;
+        GameManager.Instance.OnComboProgressChanged -= ComboProgressChanged;
     }
 
     private void Update()
@@ -60,38 +55,17 @@ public class UIManager : MonoBehaviour
         if (scoreText != null)
             scoreText.text = val.ToString();
     }
-    private void ComboMultipleChanged(int combo)
-    {
-        if (scoreText != null)
-            comboMultipleText.text = $"X{combo}";
-
-        switch (combo)
-        {
-            case 1:
-                comboMultipleText.color = Color.white;
-                break;
-            case 2:
-                comboMultipleText.color = Color.yellow;
-                break;
-            case 3:
-                comboMultipleText.color = Color.red;
-                break;
-        }
-    }
 
     private void ComboChanged(int combo)
     {
         if (comboText != null)
-            comboText.text = combo.ToString();
+            comboText.text = $"Combo x{combo}!";
     }
 
     private void ComboProgressChanged(float normalized)
     {
         if (comboSlider != null)
-        {
-            comboSlider.localScale = new Vector3(normalized, 1, 0);
-            comboGroup.alpha = normalized;
-        }
+            comboSlider.value = normalized;
     }
 
     public void PauseGame() //일시 정지
@@ -114,5 +88,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+   
 
 }
