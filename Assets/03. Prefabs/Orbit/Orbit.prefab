@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 717533212441250410}
   - component: {fileID: 1886276442275266132}
   - component: {fileID: 1276074204310977462}
+  - component: {fileID: -3505831720768256189}
   m_Layer: 6
   m_Name: Orbit
   m_TagString: Orbit
@@ -108,7 +109,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7fdefd19da201b543a566dfcee267ee6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 859ea1733c7a1a041afa7f2ca18484fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -153,7 +154,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 0.85
 --- !u!114 &1276074204310977462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +169,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Top: {fileID: 3363989359184417934}
   Bottom: {fileID: 4696831177002882711}
+--- !u!114 &-3505831720768256189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4632693193490929165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207fd52f5fe6e774aa332a6a1fad243c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePrefab: {fileID: 4348765971193043730, guid: e95e7cda196e7874bb6ae7121861043e, type: 3}
+  spawnChance: 1
+  orbitRadiusMultiplier: 1.4
+  orbitRadiusAdd: 0
+  angularSpeedMin: 70
+  angularSpeedMax: 140
+  randomDirection: 1
+  avoidCenterAngle: 270
+  avoidHalfRange: 35
+  maxTries: 25
+  restartOnHit: 0
 --- !u!1 &4945433489595743719
 GameObject:
   m_ObjectHideFlags: 0
