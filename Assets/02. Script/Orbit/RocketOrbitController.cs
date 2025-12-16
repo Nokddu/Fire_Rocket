@@ -270,4 +270,14 @@ public class RocketOrbitController : MonoBehaviour
             EnterOrbit(other.transform);
         }
     }
+
+    public void HitByObstacle(bool restartOnHit = false)
+    {
+        // 최소 동작: 콤보 깨기
+        comboBrokenThisOrbit = true;
+        GameManager.Instance?.ResetCombo();
+        GameManager.Instance?.SetComboProgress01(0f);
+
+        // restartOnHit은 나중에 "즉시 리트라이" 만들 때 쓰면 됨
+    }
 }
