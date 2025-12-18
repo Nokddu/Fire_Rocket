@@ -821,8 +821,10 @@ GameObject:
   - component: {fileID: 80279527}
   - component: {fileID: 80279529}
   - component: {fileID: 80279528}
+  - component: {fileID: 80279530}
+  - component: {fileID: 80279531}
   m_Layer: 5
-  m_Name: gameover
+  m_Name: Gameover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -889,6 +891,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80279526}
   m_CullTransparentMesh: 1
+--- !u!114 &80279530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80279526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1938e6e96936c46bd29bc630dbe597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textUI: {fileID: 0}
+  lines: []
+  lineDelay: 0.5
+--- !u!114 &80279531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80279526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11df116c859c504bbbc018922e05032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 0}
+  restart: {fileID: 1708901060}
+  scoreText: {fileID: 0}
+  comboSlider: {fileID: 0}
+  comboMultipleText: {fileID: 0}
+  comboText: {fileID: 0}
+  comboGroup: {fileID: 0}
 --- !u!1 &101992750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,6 +1582,10 @@ MonoBehaviour:
   minX: -5
   maxX: 5
   orbitGap: 5
+  camBaseSize: 5
+  camSizeScale: 1.1
+  camOffsetY: 2
+  topMargin: 1
   Money: {fileID: 0}
 --- !u!4 &267028148
 Transform:
@@ -2218,7 +2258,9 @@ MonoBehaviour:
   restart: {fileID: 0}
   scoreText: {fileID: 0}
   comboSlider: {fileID: 0}
+  comboMultipleText: {fileID: 0}
   comboText: {fileID: 0}
+  comboGroup: {fileID: 0}
 --- !u!1 &465545443
 GameObject:
   m_ObjectHideFlags: 0
@@ -6330,7 +6372,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1708901063}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 80279531}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1708901063
 MonoBehaviour:
   m_ObjectHideFlags: 0
