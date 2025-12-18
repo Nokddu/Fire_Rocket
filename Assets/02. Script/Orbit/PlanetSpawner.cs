@@ -31,6 +31,9 @@ public class PlanetSpawner : MonoBehaviour
     //임시 재화 프리팹
     public GameObject Money;
 
+    //게임오버라인
+    public GameOverLine gameOverLine;
+
 
     // 재화 스폰 위치
     private Vector3 prevTrans;
@@ -136,6 +139,8 @@ public class PlanetSpawner : MonoBehaviour
 
         int index = planets.FindIndex(p => p.orbit != null && p.orbit.transform == orbitTransform);
         if (index == -1) return;
+
+        gameOverLine.MoveCenter(planets[index].planet.transform);
 
         currentIndex = index;
 
