@@ -3,24 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class MoneyManager : MonoBehaviour
+public class MoneyManager : Singleton<MoneyManager>
 {
-    public static MoneyManager Instance;
 
     public int currentMoney = 0;
 
     public TextMeshProUGUI moneyText;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-    }
 
     private void Start()
     {

@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
 
     private Vector3 camVelocity = Vector3.zero;
 
+    private bool isGameOver = false;
+
     private void Awake()
     {
         orbitController = GetComponent<RocketOrbitController>();
@@ -36,6 +38,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+
+        GameManager.Instance.OnGameOvered += GameOverCameraSet;
 
         // 카메라가 정사영(Orthographic)인지 한 번 확인
         if (cam != null && !cam.orthographic)
@@ -49,9 +53,36 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameOvered -= GameOverCameraSet;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            isGameOver = true;
+        }
+
+        if (isGameOver)
+        {
+            cam.orthographicSize = Mathf.Lerp(
+            cam.orthographicSize,
+            20f,
+            0.5f * Time.deltaTime
+        );
+        }
+    }
+
+    private void GameOverCameraSet()
+    {
+        isGameOver = true;
+    }
+
     private void LateUpdate()
     {
-        if (cam == null || orbitController == null)
+        if (cam == null || orbitController == null || isGameOver)
             return;
 
         Vector3 targetPos;
