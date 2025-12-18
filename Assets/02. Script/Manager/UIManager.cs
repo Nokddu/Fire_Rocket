@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.SetScore += ScoreSet;
         GameManager.Instance.OnComboMultipleChanged += ComboMultipleChanged;
         GameManager.Instance.OnComboProgressChanged += ComboProgressChanged;
-        GameManager.Instance.OnComboChanged += ComboChanged; 
+        GameManager.Instance.OnComboChanged += ComboChanged;
 
         if (comboSlider != null)
             comboSlider.localScale = Vector3.zero;
@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance == null) return;
 
         GameManager.Instance.SetScore -= ScoreSet;
-        GameManager.Instance.OnComboMultipleChanged -= ComboMultipleChanged; 
+        GameManager.Instance.OnComboMultipleChanged -= ComboMultipleChanged;
         GameManager.Instance.OnComboProgressChanged -= ComboProgressChanged;
         GameManager.Instance.OnComboChanged -= ComboChanged;
     }
