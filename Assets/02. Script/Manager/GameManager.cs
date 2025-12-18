@@ -22,7 +22,6 @@ public class GameManager : Singleton<GameManager>
 
     // 기존 점수 이벤트
     public Action<int> SetScore;
-
     // 콤보 관련 이벤트
     public Action<int> OnComboMultipleChanged;           // 콤보 단계 변경(x1,x2,x3)
     public Action<float> OnComboProgressChanged; // 콤보 슬라이더(0~1)
@@ -31,6 +30,9 @@ public class GameManager : Singleton<GameManager>
     //// 현재 콤보 단계와 배율(1,2,3)
     //public int ComboLevel => comboLevel;
     //public float ComboMultiplier => comboLevel;
+
+    // 게임 오버시 실행될 메서드
+    public event Action OnGameOvered;
 
     public int ComboCount => comboCount;
 
@@ -105,5 +107,10 @@ public class GameManager : Singleton<GameManager>
     {
         normalized = Mathf.Clamp01(normalized);
         OnComboProgressChanged?.Invoke(normalized);
+    }
+
+    public void GameOver()
+    {
+        OnGameOvered?.Invoke();
     }
 }
