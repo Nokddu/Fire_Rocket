@@ -9,7 +9,7 @@ public class GameOverLine : MonoBehaviour
         if (planet == null) 
             return;
 
-        transform.position = planet.position;
+        transform.position= new Vector3 (planet.position.x,planet.position.y + 7,0);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -21,6 +21,7 @@ public class GameOverLine : MonoBehaviour
 
     public void GameOver()
     {
+        GameManager.Instance.GameOver();
         Debug.Log("게임오버");
     }
 }
