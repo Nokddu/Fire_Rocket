@@ -1043,6 +1043,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.334
       objectReference: {fileID: 0}
+    - target: {fileID: 4720259420906849581, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
+      propertyPath: crashFxPrefab
+      value: 
+      objectReference: {fileID: 198000010585806678, guid: 3fe8459a9dddcfd438029d7c396b7ebc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
