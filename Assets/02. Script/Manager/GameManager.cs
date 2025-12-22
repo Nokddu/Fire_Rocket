@@ -33,6 +33,8 @@ public class GameManager : Singleton<GameManager>
 
     // 게임 오버시 실행될 메서드
     public event Action OnGameOvered;
+    // 행성 충돌(죽음) 전용 이벤트 추가
+    public event Action OnCrashed;
 
     public int ComboCount => comboCount;
 
@@ -112,5 +114,11 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         OnGameOvered?.Invoke();
+    }
+
+    // 충돌 전용 게임오버
+    public void CrashGameOver()
+    {
+        OnCrashed?.Invoke();
     }
 }
