@@ -98,9 +98,11 @@ public class OrbitingObstacle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var rocket = other.GetComponentInParent<RocketOrbitController>();
-        if (rocket == null) return;
+        GameManager.Instance.GameOver();
 
-        rocket.HitByObstacle(restartOnHit);
+        //var rocket = other.GetComponentInParent<RocketOrbitController>();
+        //if (rocket == null) return;
+
+        //rocket.HitByObstacle(restartOnHit);
     }
 }

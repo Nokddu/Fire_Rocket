@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2965489152684132005}
   - component: {fileID: 8810791549635880430}
   - component: {fileID: 1150947792063948191}
+  - component: {fileID: 4720259420906849581}
   m_Layer: 0
   m_Name: SpaceShip
   m_TagString: Player
@@ -214,7 +215,28 @@ MonoBehaviour:
   rayDistance: 30
   rayLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+--- !u!114 &4720259420906849581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312841330437370100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f458df8d04de25343b8fcaef0c8e7006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleTag: Obstacle
+  crashFxPrefab: {fileID: 3648941461473624841, guid: 53bc03957b4d55745ac51989a40c8ebf, type: 3}
+  fxParent: {fileID: 0}
+  stopChildParticles: 1
+  disableRocketController: 1
+  disableColliderOnCrash: 1
+  hideSpriteOnCrash: 1
+  destroyRocket: 0
+  destroyDelay: 0.5
 --- !u!1 &8431129293330810588
 GameObject:
   m_ObjectHideFlags: 0
