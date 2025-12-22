@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207fd52f5fe6e774aa332a6a1fad243c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 4348765971193043730, guid: 083516fe0e0e0304aaf1a16d9885c21b, type: 3}
+  obstaclePrefab: {fileID: 4348765971193043730, guid: e95e7cda196e7874bb6ae7121861043e, type: 3}
   spawnChance: 1
   orbitRadiusMultiplier: 1.4
   orbitRadiusAdd: 0
