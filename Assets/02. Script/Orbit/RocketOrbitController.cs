@@ -260,6 +260,25 @@ public class RocketOrbitController : MonoBehaviour
         isFirst = false; // 처음 시작을 알림
     }
 
+    // 순수 첫발사용도
+    public void LaunchFromStart()
+    {
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+
+        rb.isKinematic = true;
+        rb.gravityScale = 0f;       // 시작시 리지드바디로 떨어지지않게
+
+        isOrbiting = false;
+        isFlying = true;
+
+        if (particle != null)
+            particle.Play();
+
+        flyDirection = transform.up.normalized;
+        isFirst = false;
+    }
+
     // 궤도 트리거에 닿았을 때
     private void OnTriggerEnter2D(Collider2D other)
     {

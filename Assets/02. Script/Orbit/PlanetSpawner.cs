@@ -53,17 +53,41 @@ public class PlanetSpawner : MonoBehaviour
     private float prevOrbitHalf;   // 이전 궤도 스케일의 절반
     private int currentIndex = -1; // 로켓이 도달한 “현재 행성” 인덱스
 
+    public void RegisterFirstPlanet(GameObject planetGO, GameObject orbitGO)    // 첫 행성 인덱스에 등록
+    {
+        planets.Clear();
+
+        planets.Add(new PlanetEntry
+        {
+            planet = planetGO,
+            orbit = orbitGO
+        });
+
+        float orbitHalf = orbitGO.transform.localScale.x * 0.5f;
+
+        prevOrbitHalf = orbitHalf;
+
+        // 기준값 세팅
+        nextY = planetGO.transform.position.y + 2 * orbitHalf + 2 * orbitGap; ;
+
+        currentIndex = 0;
+    }
+
     private void Start()
     {
-        nextY = startPlanet;
-        prevOrbitHalf = 0f;
-
-        // 처음에 몇 개 미리 깔아두기
-        for (int i = 0; i < initialSpawnCount; i++)
+        if (planets.Count == 0)
         {
-            SpawnNextPlanet();
+            nextY = startPlanet;
+            prevOrbitHalf = 0f;
         }
+
+        //처음에 몇 개 미리 깔아두기
+        //for (int i = 0; i < initialSpawnCount; i++)
+        //{
+        //    SpawnNextPlanet();
+        //}
     }
+
 
     /// <summary>
     /// 행성 + 궤도 한 세트를 생성해서 리스트에 추가
@@ -137,15 +161,33 @@ public class PlanetSpawner : MonoBehaviour
     {
         if (orbitTransform == null) return;
 
-        int index = planets.FindIndex(p => p.orbit != null && p.orbit.transform == orbitTransform);
-        if (index == -1) return;
+            int index = planets.FindIndex(p => p.orbit != null && p.orbit.transform == orbitTransform);
+        //if (index == -1) return;
+
+        if (index == -1)
+        {
+            RegisterFirstPlanet(
+                orbitTransform.parent.gameObject, // planet
+                orbitTransform.gameObject          // orbit
+            );
+
+            gameOverLine.MoveCenter(orbitTransform.parent);
+
+
+            for (int i = 0; i < initialSpawnCount; i++)
+            {
+                SpawnNextPlanet();
+            }
+            return;
+        }
 
         gameOverLine.MoveCenter(planets[index].planet.transform);
 
         currentIndex = index;
 
-        // (1) 현재 기준으로 앞쪽 최소 aheadCount 개 유지
-        EnsureAheadFromIndex(index);
+
+            // (1) 현재 기준으로 앞쪽 최소 aheadCount 개 유지
+            EnsureAheadFromIndex(index);
 
         // (2) 뒤쪽은 maxBehindCount 개만 남기고 나머지 삭제
         int behind = currentIndex;                           // 0 ~ currentIndex-1 이 뒤쪽

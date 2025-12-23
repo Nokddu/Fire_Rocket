@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public bool isGameStarted = false;
+
     private int score;
     private int comboCount = 0; // 콤보 수
 
     [Header("콤보 설정")]
     [SerializeField] private float maxSpeedMultiple = 2.0f;
+
+    [Header("UI 구분")]
+    public GameObject FirstUI;
+    public GameObject MainUI;
 
     // 점수 프로퍼티
     public int Score
@@ -109,6 +115,19 @@ public class GameManager : Singleton<GameManager>
     {
         normalized = Mathf.Clamp01(normalized);
         OnComboProgressChanged?.Invoke(normalized);
+    }
+
+    public void StartGame()
+    {
+        isGameStarted = true;
+
+        if (FirstUI != null)
+            FirstUI.SetActive(false);
+
+        if (MainUI != null)
+            MainUI.SetActive(true);
+
+        FindObjectOfType<RocketOrbitController>().LaunchFromStart();
     }
 
     public void GameOver()
