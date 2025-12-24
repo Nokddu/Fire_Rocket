@@ -11,9 +11,8 @@ public class GameManager : Singleton<GameManager>
     [Header("콤보 설정")]
     [SerializeField] private float maxSpeedMultiple = 2.0f;
 
-    [Header("UI 구분")]
-    public GameObject FirstUI;
-    public GameObject MainUI;
+    [Header("플레이어")]
+    [SerializeField] private Player player;
 
     // 점수 프로퍼티
     public int Score
@@ -25,6 +24,7 @@ public class GameManager : Singleton<GameManager>
             SetScore?.Invoke(value);
         }
     }
+
 
     // 기존 점수 이벤트
     public Action<int> SetScore;
@@ -121,13 +121,10 @@ public class GameManager : Singleton<GameManager>
     {
         isGameStarted = true;
 
-        if (FirstUI != null)
-            FirstUI.SetActive(false);
-
-        if (MainUI != null)
-            MainUI.SetActive(true);
-
         FindObjectOfType<RocketOrbitController>().LaunchFromStart();
+
+        UIManager.Instance.gameStateController.SetState(GameStateId.Playing);
+        player.Init();
     }
 
     public void GameOver()
@@ -140,4 +137,6 @@ public class GameManager : Singleton<GameManager>
     {
         OnCrashed?.Invoke();
     }
+
+    
 }

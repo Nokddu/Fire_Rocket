@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         orbitController = GetComponent<RocketOrbitController>();
     }
 
-    private void Start()
+    public void Init()
     {
         cam = Camera.main;
 

@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public GameObject pausePanel;   // 일시정지 패널
-    public GameObject restart; //재시작 패널
     private bool isPaused = false;
 
     [Header("점수 텍스트")]
@@ -19,8 +17,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI comboText;
     [SerializeField] private CanvasGroup comboGroup;
 
+    [Header("게임 State")]
+    [SerializeField] public GameStateController gameStateController;
+
     private void Start()
     {
+        if (gameStateController == null)
+            gameStateController = GetComponent<GameStateController>();
+
         if (scoreText == null)
             scoreText = GetComponentInChildren<TextMeshProUGUI>();
 
@@ -34,6 +38,7 @@ public class UIManager : MonoBehaviour
 
         if (comboMultipleText != null)
             comboMultipleText.text = "X1";
+
     }
 
     private void OnDestroy()
