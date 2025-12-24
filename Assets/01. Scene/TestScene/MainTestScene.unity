@@ -327,6 +327,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &327749343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6739605782017272961, guid: d542b76baf44d6441a59d1648f73f70c, type: 3}
+  m_PrefabInstance: {fileID: 661573901}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &424498190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,7 +1662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMoney: 0
-  moneyText: {fileID: 0}
+  moneyText: {fileID: 327749343}
 --- !u!4 &1606869738
 Transform:
   m_ObjectHideFlags: 0
@@ -2025,7 +2036,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2275,6 +2286,10 @@ PrefabInstance:
     - target: {fileID: 4101874520644738621, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584551310047676504, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4720259420906849581, guid: 3938bcba8d36a8d45ad28492fdb5eb90, type: 3}
       propertyPath: crashFxPrefab
