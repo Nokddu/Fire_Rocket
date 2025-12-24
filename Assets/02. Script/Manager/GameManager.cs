@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
 
     private int score;
     private int comboCount = 0; // 콤보 수
+    private int defaultScore = 0;
 
     [Header("콤보 설정")]
     [SerializeField] private float maxSpeedMultiple = 2.0f;
@@ -108,6 +109,11 @@ public class GameManager : Singleton<GameManager>
             OnComboMultipleChanged?.Invoke(ComboLevel);
     }
 
+    public void ResetScore()
+    {
+        Score = defaultScore;
+    }
+
     /// <summary>
     /// 0~1 사이 값으로 콤보 슬라이더 갱신
     /// </summary>
@@ -125,6 +131,8 @@ public class GameManager : Singleton<GameManager>
 
         UIManager.Instance.gameStateController.SetState(GameStateId.Playing);
         player.Init();
+        ResetScore();
+        ResetCombo();
     }
 
     public void GameOver()

@@ -1,27 +1,41 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using System.Text;
 
 public class LineByLineText : MonoBehaviour
 {
     public TMP_Text textUI;
-    public string[] lines;
+    public string GameoverText;
     public float lineDelay = 0.5f;
 
-    void Start()
+    private void OnEnable()
     {
         StartCoroutine(ShowLines());
+    }
+    void Start()
+    {
+        //StartCoroutine(ShowLines());
     }
 
     IEnumerator ShowLines()
     {
         textUI.text = "";
 
-        foreach (string line in lines)
+
+        Debug.Log("이건 아니지");
+
+        foreach (char line in GameoverText)
         {
-            textUI.text += line + "\n";
+            if (line == '#')
+            {
+                textUI.text += '\n';
+                continue;
+            }
+            textUI.text += line;
             yield return new WaitForSecondsRealtime(lineDelay);
         }
+
     }
 }
 
