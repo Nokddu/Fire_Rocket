@@ -1,40 +1,50 @@
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
+    private static bool isQuitting;
 
     public static T Instance
     {
         get
         {
+            if (isQuitting) return null;
+
             if (instance == null)
             {
-                // 해당 컴포넌트를 가지고 있는 게임 오브젝트를 찾아서 반환한다.
-                instance = (T)FindAnyObjectByType(typeof(T));
+                instance = FindFirstObjectByType<T>(FindObjectsInactive.Include);
 
-                if (instance == null) // 인스턴스를 찾지 못한 경우
+                // 정말 자동생성이 필요한 타입만 여기서 만들거나,
+                // 아예 자동생성 금지로 두는 걸 추천
+                if (instance == null)
                 {
-                    // 새로운 게임 오브젝트를 생성하여 해당 컴포넌트를 추가한다.
-                    GameObject obj = new GameObject(typeof(T).Name, typeof(T));
-                    // 생성된 게임 오브젝트에서 해당 컴포넌트를 instance에 저장한다.
-                    instance = obj.GetComponent<T>();
+                    var go = new GameObject(typeof(T).Name);
+                    instance = go.AddComponent<T>();
                 }
             }
-
             return instance;
         }
     }
 
-    private void Awake()
+    protected virtual bool DontDestroy => true; // 타입별로 끄고 켤 수 있게
+
+    protected virtual void Awake()
     {
-        if (transform.parent != null && transform.root != null) // 해당 오브젝트가 자식 오브젝트라면
+        if (instance != null && instance != this)
         {
-            DontDestroyOnLoad(this.transform.root.gameObject); // 부모 오브젝트를 DontDestroyOnLoad 처리
+            Destroy(gameObject); // 중복 제거
+            return;
         }
-        else
-        {
-            DontDestroyOnLoad(this.gameObject); // 해당 오브젝트가 최 상위 오브젝트라면 자신을 DontDestroyOnLoad 처리
-        }
+
+        instance = this as T;
+
+        if (DontDestroy)
+            DontDestroyOnLoad(gameObject);
+    }
+
+    protected virtual void OnApplicationQuit()
+    {
+        isQuitting = true;
     }
 }

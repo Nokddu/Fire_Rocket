@@ -918,13 +918,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11df116c859c504bbbc018922e05032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausePanel: {fileID: 0}
-  restart: {fileID: 1708901060}
   scoreText: {fileID: 0}
   comboSlider: {fileID: 0}
   comboMultipleText: {fileID: 0}
   comboText: {fileID: 0}
   comboGroup: {fileID: 0}
+  gameStateController: {fileID: 0}
+  bestScore: {fileID: 0}
 --- !u!1 &101992750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,6 +1587,7 @@ MonoBehaviour:
   camOffsetY: 2
   topMargin: 1
   Money: {fileID: 0}
+  gameOverLine: {fileID: 0}
 --- !u!4 &267028148
 Transform:
   m_ObjectHideFlags: 0
@@ -2254,13 +2255,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11df116c859c504bbbc018922e05032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausePanel: {fileID: 1599087016}
-  restart: {fileID: 0}
   scoreText: {fileID: 0}
   comboSlider: {fileID: 0}
   comboMultipleText: {fileID: 0}
   comboText: {fileID: 0}
   comboGroup: {fileID: 0}
+  gameStateController: {fileID: 0}
+  bestScore: {fileID: 0}
 --- !u!1 &465545443
 GameObject:
   m_ObjectHideFlags: 0

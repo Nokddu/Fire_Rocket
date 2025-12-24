@@ -122,6 +122,7 @@ public class UIManager : Singleton<UIManager>
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        UIManager.Instance.gameStateController.SetState(GameStateId.Lobby);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

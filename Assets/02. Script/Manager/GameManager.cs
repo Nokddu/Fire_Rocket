@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private float maxSpeedMultiple = 2.0f;
 
     [Header("플레이어")]
-    [SerializeField] private Player player;
+    [SerializeField] public Player player;
 
     // 점수 프로퍼티
     public int Score
@@ -132,6 +132,7 @@ public class GameManager : Singleton<GameManager>
         OnGameOvered?.Invoke();
         DataManager.SaveData(Score,"Score");
         DataManager.SaveData(MoneyManager.Instance.currentMoney, "Money");
+        UIManager.Instance.gameStateController.SetState(GameStateId.GameOver);
     }
 
     // 충돌 전용 게임오버
