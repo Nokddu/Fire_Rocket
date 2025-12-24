@@ -139,6 +139,7 @@ public class GameManager : Singleton<GameManager>
     public void CrashGameOver()
     {
         OnCrashed?.Invoke();
+        GameOver();
     }
 
     
