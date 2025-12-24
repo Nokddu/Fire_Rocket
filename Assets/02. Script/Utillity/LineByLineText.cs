@@ -13,17 +13,10 @@ public class LineByLineText : MonoBehaviour
     {
         StartCoroutine(ShowLines());
     }
-    void Start()
-    {
-        //StartCoroutine(ShowLines());
-    }
 
     IEnumerator ShowLines()
     {
         textUI.text = "";
-
-
-        Debug.Log("이건 아니지");
 
         foreach (char line in GameoverText)
         {
