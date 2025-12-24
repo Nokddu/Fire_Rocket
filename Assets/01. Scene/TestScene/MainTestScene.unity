@@ -369,6 +369,7 @@ MonoBehaviour:
   comboText: {fileID: 602411729}
   comboGroup: {fileID: 191130448}
   gameStateController: {fileID: 194290697}
+  bestScore: {fileID: 1375918008}
 --- !u!4 &194290696
 Transform:
   m_ObjectHideFlags: 0
@@ -1007,6 +1008,7 @@ GameObject:
   - component: {fileID: 473605772}
   - component: {fileID: 473605771}
   - component: {fileID: 473605770}
+  - component: {fileID: 473605773}
   m_Layer: 0
   m_Name: Money_Canvas
   m_TagString: Untagged
@@ -1097,6 +1099,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &473605773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473605768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0557941a24ad25440a89f253e190ec01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMoney: 0
+  moneyText: {fileID: 1073114146}
 --- !u!1 &542581787
 GameObject:
   m_ObjectHideFlags: 0
