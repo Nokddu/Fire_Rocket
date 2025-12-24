@@ -133,6 +133,8 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         OnGameOvered?.Invoke();
+        DataManager.SaveData(Score,"Score");
+        DataManager.SaveData(MoneyManager.Instance.currentMoney, "Money");
     }
 
     // 충돌 전용 게임오버

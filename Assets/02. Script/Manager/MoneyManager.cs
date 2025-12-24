@@ -13,6 +13,7 @@ public class MoneyManager : Singleton<MoneyManager>
 
     private void Start()
     {
+        currentMoney = DataManager.LoadData("Money");
         UpdateMoneyUI();
     }
 

@@ -19,6 +19,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI comboText;
     [SerializeField] private CanvasGroup comboGroup;
 
+
+    // 지울 변수
+    [SerializeField] private TextMeshProUGUI bestScore;
+
     private void Start()
     {
         if (scoreText == null)
@@ -34,6 +38,8 @@ public class UIManager : MonoBehaviour
 
         if (comboMultipleText != null)
             comboMultipleText.text = "X1";
+
+        bestScore.text = DataManager.LoadData("Score").ToString();
     }
 
     private void OnDestroy()
